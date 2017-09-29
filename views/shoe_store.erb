@@ -3,14 +3,13 @@
     <div class="card">
       <h3>Shoe Store:</h3>
       <h1><%= @shoe_store.title() %></h1>
-      <h3>Brands:</h3>
 
       <% if @shoe_store.shoe_brands().any?() %>
         <h3>Here are all the brands sold in this store:</h3>
 
         <ul>
           <% @shoe_store.shoe_brands().each() do |shoe_brand| %>
-            <li><%= shoe_brand.title() %></li>
+            <li><%= shoe_brand.title() %> $<%= '%.02f' % shoe_brand.price %></li>
           <% end %>
         </ul>
 

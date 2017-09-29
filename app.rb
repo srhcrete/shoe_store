@@ -56,11 +56,11 @@ end
 post("/shoe_store/:id") do
   @shoe_brands = ShoeBrand.all()
   @shoe_store = ShoeStore.find(params["id"])
-  @shoe_brand = ShoeBrand.find(params["id"])
   title = params['shoe_brands']
-  shoe_brand = ShoeBrand.create({:title => title, :price => price})
+  price = params['price']
+  @shoe_brand = ShoeBrand.new({:title => title, :price => price})
   if shoe_brand.save()
-    @shoe_store.shoe_brands.push(shoe_brand)
+    @shoe_store.shoe_brands.push(@shoe_brand)
     erb(:shoe_store)
   else
     redirect('/shoe_brand_error')
@@ -70,11 +70,10 @@ end
 post("/shoe_brand/:id") do
   @shoe_stores = ShoeStore.all()
   @shoe_brand = ShoeBrand.find(params["id"])
-  @shoe_store = ShoeStore.find(params["id"])
   title = params['shoe_stores']
-  shoe_store = ShoeStore.create({:title => title})
+  @shoe_store = ShoeStore.new({:title => title})
   if shoe_store.save()
-    @shoe_brand.shoe_stores.push(shoe_stores)
+    @shoe_brand.shoe_stores.push(@shoe_stores)
     erb(:shoe_brand)
   else
     redirect('/shoe_store_error')
