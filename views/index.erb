@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <div class="card">
       <a href="/add_shoe_store">Add a shoe store to the list!</a>
     </div>
@@ -16,6 +16,7 @@
     </div>
     <br>
     <div class="card">
+      <h1>Shoe Stores</h1>
       <% if @shoe_stores.any?() %>
       <h3>Here are the shoe stores:</h3>
 
@@ -32,3 +33,27 @@
     <% end %>
     </div>
   </div>
+
+  <div class="col-sm-6">
+  <div class="card">
+    <a href="/add_shoe_brand">Add a shoe brand to the list!</a>
+  </div>
+  <br>
+  <div class="card">
+    <h1>Shoe Brands</h1>
+    <% if @shoe_brands.any?() %>
+    <h3>Here are the shoe brands:</h3>
+
+    <ul>
+      <% @shoe_brands.each() do |shoe_brand| %>
+        <li><%= shoe_brand.title() %></li>
+      <% end %>
+    </ul>
+
+  <% else %>
+
+      <p>There are no shoe brands yet!</p>
+
+  <% end %>
+  </div>
+</div>

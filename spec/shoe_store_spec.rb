@@ -7,8 +7,8 @@ describe(ShoeStore) do
     expect(shoe_store.save()).to(eq(false))
   end
   it("ensures that title doesn't already exist") do
-    ShoeStore.create({:title => 'Adidas'})
-    shoe_store = ShoeStore.new({:title => 'adidas'})
+    ShoeStore.create({:title => 'Adidas Outlet'})
+    shoe_store = ShoeStore.new({:title => 'adidas outlet'})
     expect(shoe_store.save()).to(eq(false))
   end
 end

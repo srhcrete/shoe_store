@@ -10,21 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929172926) do
+ActiveRecord::Schema.define(version: 20170929182338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "shoe_brands", force: :cascade do |t|
-    t.string "title"
+  create_table "match_join", force: :cascade do |t|
     t.integer "shoe_store_id"
+    t.integer "shoe_brand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "shoe_brands", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "price", precision: 8, scale: 2
+  end
+
   create_table "shoe_stores", force: :cascade do |t|
     t.string "title"
-    t.integer "shoe_brand_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

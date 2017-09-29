@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <h3>Add New Shoe brand</h3>
+
+      <form action="/create_shoe_brand" method="post">
+        <div class="form-group">
+          <label for="title" class="form-label">Name new shoe brand:</label>
+          <input type="text" name="title" class="form-control" id="title" required>
+          <label for="price" class="form-label">Enter the price of the shoe:</label>
+          <input type="text" name="price" class="form-control" id="price" required>
+          <br>
+          <button type="submit" class="btn btn-success">Add Shoe brand</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <% if @shoe_brands.any?() %>
+      <h3>Here are the shoe brands:</h3>
+
+      <form action="/delete_shoe_brand" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <% @shoe_brands.each() do |shoe_brand| %>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="shoe_brand_ids[]" value="<%= shoe_brand.id() %>"> <a href= "shoe_brand/<%= shoe_brand.id %>"><%= shoe_brand.title() %></a>
+          </label>
+        </div>
+      <% end %>
+
+        <button type="submit" class="btn btn-danger">Delete Selected Shoe brands</button>
+      </form>
+
+    <% else %>
+
+        <p>There are no shoe shoe_brand_tests yet!</p>
+
+    <% end %>
+    </div>
+    <br>
+    <div class="card">
+      <a href="/"><button class="btn home">Return To Homepage</a>
+    </div>
+  </div>
+</div>
