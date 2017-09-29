@@ -1,17 +1,21 @@
-/*@font-face {
-  font-family: frontier;
-  src: url('Final_Frontier.ttf');
-}*/
+@font-face {
+  font-family: sports;
+  src: url('sports.ttf');
+}
 
 body {
-  /*font-family: frontier;*/
+  font-family: sports;
   background-image: url('/img/galaxy.jpg');
-  color: #0E171C;
+  color: #19123C;
+}
+
+a {
+  color: #F0CCD4;
 }
 
 .jumbotron {
   background-color: #987F90;
-  color: #0E171C;
+  /*color: #0E171C;*/
 }
 
 .jumbotron h1 {

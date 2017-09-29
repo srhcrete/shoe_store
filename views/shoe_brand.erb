@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <h3>Shoe Brand:</h3>
+      <h1><%= @shoe_brand.title() %></h1>
+      <h3>Stores:</h3>
+
+      <% if @shoe_brand.shoe_stores().any?() %>
+        <h3>Here are all the stores that sell this brand:</h3>
+
+        <ul>
+          <% @shoe_brand.shoe_stores().each() do |shoe_store| %>
+            <li><%= shoe_store.title() %></li>
+          <% end %>
+        </ul>
+
+        <% else %>
+          <p>There are no stores for this brand yet!</p>
+      <% end %>
+    </div>
+  </div>
+  <br>
+  <div class="col-sm-6">
+    <div class="card">
+      <% if @shoe_stores.any?() %>
+      <h3>Add new stores that sell this brand:</h3>
+
+      <form action="/add_shoe_store/<%= @shoe_brand.id() %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <% @shoe_stores.each() do |shoe_store| %>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="shoe_store_ids[]" value="<%= shoe_store.id() %>"> <%= shoe_store.title() %>
+          </label>
+        </div>
+      <% end %>
+
+        <button class="btn btn-success" type="submit">Add Stores</button>
+      </form>
+
+    <% else %>
+
+        <p>There are no stores yet!</p>
+
+    <% end %>
+
+    </div>
+    <div class="card">
+      <a href="/"><button class="btn home">Return To Homepage</a>
+    </div>
+  </div>
+</div>
