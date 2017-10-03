@@ -35,6 +35,16 @@ describe('the app', {:type => :feature}) do
     end
   end
 
+  describe('searching for a store', {:type => :feature}) do
+  it('allows a user to search for a store') do
+    ShoeStore.create(:title => 'Tom\'s Cobblers')
+    visit('/')
+    fill_in('search_store', :with => 'Tom\'s Cobblers')
+    click_button('Search Stores')
+    expect(page).to have_content('Tom\'s Cobblers')
+  end
+end
+
   describe('adding a new brand', {:type => :feature}) do
     it('allows a user to add a brand') do
       visit('/')

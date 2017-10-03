@@ -121,3 +121,14 @@ delete('/delete_shoe_brand') do
   end
   redirect('/add_shoe_brand')
 end
+
+post("/search_shoe_store") do
+  search_query = params['search']
+  @shoe_store = ShoeStore.where("title ILIKE (?)", "%#{search_query}%").first
+  if @shoe_store
+    id = @shoe_store.id
+    redirect("/shoe_store/#{id}")
+  else
+    erb(:store_search_fail)
+  end
+end
