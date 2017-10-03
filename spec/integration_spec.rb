@@ -35,7 +35,7 @@ describe('the app', {:type => :feature}) do
     end
   end
 
-  describe('searching for a store', {:type => :feature}) do
+describe('searching for a store', {:type => :feature}) do
   it('allows a user to search for a store') do
     ShoeStore.create(:title => 'Tom\'s Cobblers')
     visit('/')
@@ -65,5 +65,16 @@ describe('deleting a brand', {:type => :feature}) do
     check('Superstars')
     click_button('Delete Selected Shoe brands')
     expect(page).not_to have_content('Superstars')
+  end
+end
+
+describe('updating a store name', {:type => :feature}) do
+  it('allows a user to update a store name') do
+    ShoeStore.create(:title => 'Tom\'s Cobblers')
+    visit('/')
+    click_link('Tom\'s Cobblers')
+    fill_in('store_name', :with => 'Shoe Palace')
+    click_button('Update Store Name')
+    expect(page).to have_content('Shoe Palace')
   end
 end

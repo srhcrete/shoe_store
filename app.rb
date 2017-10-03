@@ -128,6 +128,14 @@ patch('/add_shoe_store/:id') do
   end
 end
 
+patch('/update_shoe_store/:id') do
+  @shoe_brands = ShoeBrand.all()
+  @shoe_store = ShoeStore.find(params["id"])
+  store_name = params['store_name']
+  @shoe_store.update({:title => store_name})
+  erb(:shoe_store)
+end
+
 delete('/delete_shoe_store') do
   shoe_store_ids = params.fetch('shoe_store_ids')
   shoe_store_ids.each do |i|

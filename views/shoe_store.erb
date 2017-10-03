@@ -17,6 +17,19 @@
           <p>There are no brands for this store yet!</p>
       <% end %>
     </div>
+    <br>
+    <div class="card">
+      <form action="/update_shoe_store/<%= @shoe_store.id() %>" method="post">
+        <div class="form-group">
+          <input type="hidden" name="_method" value="patch">
+          <label for="store_name">Store Name:</label>
+          <input type="text" name="store_name" id="store_name" required>
+          <br>
+          <button type="submit" class="btn btn-warning">Update Store Name</button>
+        </div>
+      </form>
+      <br>
+    </div>
   </div>
   <br>
   <div class="col-sm-6">
