@@ -38,7 +38,7 @@ post('/create_shoe_store') do
   if @shoe_store.save()
     redirect('/add_shoe_store')
   else
-    erb(:shoe_store_error)
+    erb(:add_store_fail)
   end
 end
 
@@ -49,7 +49,7 @@ post('/create_shoe_brand') do
   if @shoe_brand.save()
     redirect('/add_shoe_brand')
   else
-    erb(:shoe_brand_error)
+    erb(:add_brand_fail)
   end
 end
 
@@ -63,7 +63,7 @@ post("/shoe_store/:id") do
     @shoe_store.shoe_brands.push(@shoe_brand)
     erb(:shoe_store)
   else
-    redirect('/shoe_brand_error')
+    redirect('/add_brand_fail')
   end
 end
 
@@ -76,27 +76,40 @@ post("/shoe_brand/:id") do
     @shoe_brand.shoe_stores.push(@shoe_stores)
     erb(:shoe_brand)
   else
-    redirect('/shoe_store_error')
+    redirect('/add_store_fail')
   end
 end
 
-
 patch('/add_shoe_brand/:id') do
   @shoe_store = ShoeStore.find(params['id'])
-  shoe_brand_ids = params.fetch('shoe_brand_ids')
-  shoe_brand_ids.each do |i|
-    shoe_brand = ShoeBrand.find(i)
-    @shoe_store.shoe_brands.push(shoe_brand)
+  if params.has_key?('shoe_brand_ids') == false
+    erb(:add_brand_fail)
+  else
+    params.fetch('shoe_brand_ids').each do |i|
+      shoe_brand = ShoeBrand.find(i)
+      @shoe_store.shoe_brands.push(shoe_brand)
+      redirect("/shoe_store/#{@shoe_store.id}")
+    end
   end
-  redirect("/shoe_store/#{@shoe_store.id}")
 end
 
 patch('/add_shoe_store/:id') do
   @shoe_brand = ShoeBrand.find(params['id'])
-  shoe_store_ids = params.fetch('shoe_store_ids')
-  shoe_store_ids.each do |i|
+  if params.has_key?('shoe_store_ids') == false
+    erb(:add_store_fail)
+  else
+    params.fetch('shoe_store_ids').each do |i|
     shoe_store = ShoeStore.find(i)
     @shoe_brand.shoe_stores.push(shoe_store)
+    redirect("/shoe_brand/#{@shoe_brand.id}")
+    end
   end
-  redirect("/shoe_brand/#{@shoe_brand.id}")
+end
+
+delete('/delete_shoe_store') do
+  shoe_store_ids = params.fetch('shoe_store_ids')
+  shoe_store_ids.each do |i|
+  ShoeStore.find(i).delete()
+  end
+  redirect('/add_shoe_store')
 end
