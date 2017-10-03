@@ -113,3 +113,11 @@ delete('/delete_shoe_store') do
   end
   redirect('/add_shoe_store')
 end
+
+delete('/delete_shoe_brand') do
+  shoe_brand_ids = params.fetch('shoe_brand_ids')
+  shoe_brand_ids.each do |i|
+  ShoeBrand.find(i).delete()
+  end
+  redirect('/add_shoe_brand')
+end

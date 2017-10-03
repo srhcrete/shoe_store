@@ -34,4 +34,15 @@ describe('the app', {:type => :feature}) do
       expect(page).not_to have_content('Tom\'s Cobblers')
     end
   end
+
+  describe('adding a new brand', {:type => :feature}) do
+    it('allows a user to add a brand') do
+      visit('/')
+      click_link('Add or Delete a brand!')
+      fill_in('title', :with => 'Superstars')
+      fill_in('price', :with => '80.00')
+      click_button('Add Shoe brand')
+      expect(page).to have_content('Superstars')
+    end
+  end
 end
