@@ -80,6 +80,28 @@ post("/shoe_brand/:id") do
   end
 end
 
+post("/search_shoe_store") do
+  search_query = params['search']
+  @shoe_store = ShoeStore.where("title ILIKE (?)", "%#{search_query}%").first
+  if @shoe_store
+    id = @shoe_store.id
+    redirect("/shoe_store/#{id}")
+  else
+    erb(:store_search_fail)
+  end
+end
+
+post("/search_shoe_brand") do
+  search_query = params['search']
+  @shoe_brand = ShoeBrand.where("title ILIKE (?)", "%#{search_query}%").first
+  if @shoe_brand
+    id = @shoe_brand.id
+    redirect("/shoe_brand/#{id}")
+  else
+    erb(:brand_search_fail)
+  end
+end
+
 patch('/add_shoe_brand/:id') do
   @shoe_store = ShoeStore.find(params['id'])
   if params.has_key?('shoe_brand_ids') == false
@@ -120,15 +142,4 @@ delete('/delete_shoe_brand') do
   ShoeBrand.find(i).delete()
   end
   redirect('/add_shoe_brand')
-end
-
-post("/search_shoe_store") do
-  search_query = params['search']
-  @shoe_store = ShoeStore.where("title ILIKE (?)", "%#{search_query}%").first
-  if @shoe_store
-    id = @shoe_store.id
-    redirect("/shoe_store/#{id}")
-  else
-    erb(:store_search_fail)
-  end
 end

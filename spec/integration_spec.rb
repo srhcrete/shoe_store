@@ -56,3 +56,14 @@ end
     end
   end
 end
+
+describe('deleting a brand', {:type => :feature}) do
+  it('allows a user to delete a brand') do
+    ShoeBrand.create(:title => 'Superstars', :price => '80.00')
+    visit('/')
+    click_link('Add or Delete a brand!')
+    check('Superstars')
+    click_button('Delete Selected Shoe brands')
+    expect(page).not_to have_content('Superstars')
+  end
+end
