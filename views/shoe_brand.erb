@@ -1,9 +1,30 @@
 <div class="row">
   <div class="col-sm-6">
     <div class="card">
-      <h3>Shoe Brand:</h3>
-      <h1><%= @shoe_brand.title() %></h1>
-      <h3>Stores:</h3>
+      <h3>Brand:</h3>
+      <h1><%= @shoe_brand.title() %> $<%= @shoe_brand.price %></h1>
+    </div>
+    <br>
+    <div class="card">
+      <h5>Update Brand</h5>
+      <form action="/update_shoe_brand/<%= @shoe_brand.id() %>" method="post">
+        <div class="form-group">
+          <input type="hidden" name="_method" value="patch">
+          <label for="brand_name">Brand Name:</label>
+          <input type="text" name="brand_name" id="brand_name" required>
+        </div>
+        <div class="form_group">
+          <label for="brand_price">Brand Price:</label>
+          <input type="text" name="brand_price" id="brand_price" required>
+        </div>
+          <br>
+          <button type="submit" class="btn btn-warning">Update Brand</button>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="col-sm-6">
+    <div class="card">
 
       <% if @shoe_brand.shoe_stores().any?() %>
         <h3>Here are all the stores that sell this brand:</h3>
@@ -18,12 +39,10 @@
           <p>There are no stores for this brand yet!</p>
       <% end %>
     </div>
-  </div>
-  <br>
-  <div class="col-sm-6">
+    <br>
     <div class="card">
       <% if @shoe_stores.any?() %>
-      <h3>Add new stores that sell this brand:</h3>
+      <h3>Add stores that sell this brand:</h3>
 
       <form action="/add_shoe_store/<%= @shoe_brand.id() %>" method="post">
       <input type="hidden" name="_method" value="patch">
@@ -45,8 +64,9 @@
     <% end %>
 
     </div>
+    <br>
     <div class="card">
-      <a href="/"><button class="btn home">Return To Homepage</a>
+      <h6><a href="/">Return To Homepage</a></h6>
     </div>
   </div>
 </div>

@@ -3,19 +3,6 @@
     <div class="card">
       <h3>Shoe Store:</h3>
       <h1><%= @shoe_store.title() %></h1>
-
-      <% if @shoe_store.shoe_brands().any?() %>
-        <h3>Here are all the brands sold in this store:</h3>
-
-        <ul>
-          <% @shoe_store.shoe_brands().each() do |shoe_brand| %>
-            <li><%= shoe_brand.title() %> $<%= '%.02f' % shoe_brand.price %></li>
-          <% end %>
-        </ul>
-
-        <% else %>
-          <p>There are no brands for this store yet!</p>
-      <% end %>
     </div>
     <br>
     <div class="card">
@@ -33,6 +20,21 @@
   </div>
   <br>
   <div class="col-sm-6">
+    <div class="card">
+      <% if @shoe_store.shoe_brands().any?() %>
+        <h3>Here are all the brands sold in this store:</h3>
+
+        <ul>
+          <% @shoe_store.shoe_brands().each() do |shoe_brand| %>
+            <li><%= shoe_brand.title() %> $<%= '%.02f' % shoe_brand.price %></li>
+          <% end %>
+        </ul>
+
+        <% else %>
+          <p>There are no brands for this store yet!</p>
+      <% end %>
+    </div>
+    <br>
     <div class="card">
       <% if @shoe_brands.any?() %>
       <h3>Add these shoe brands to the store:</h3>
@@ -57,9 +59,14 @@
     <% end %>
 
     </div>
-    <br>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-12">
     <div class="card">
-      <a href="/"><button class="btn home">Return To Homepage</a>
+      <button class="btn" name="home"><a href="/">Return To Homepage</a></button>
     </div>
   </div>
+
 </div>

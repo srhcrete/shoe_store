@@ -136,6 +136,15 @@ patch('/update_shoe_store/:id') do
   erb(:shoe_store)
 end
 
+patch('/update_shoe_brand/:id') do
+  @shoe_stores = ShoeStore.all()
+  @shoe_brand = ShoeBrand.find(params["id"])
+  brand_name = params['brand_name']
+  brand_price = params['brand_price']
+  @shoe_brand.update({:title => brand_name, :price => brand_price})
+  erb(:shoe_brand)
+end
+
 delete('/delete_shoe_store') do
   shoe_store_ids = params.fetch('shoe_store_ids')
   shoe_store_ids.each do |i|

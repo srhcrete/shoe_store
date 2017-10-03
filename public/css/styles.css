@@ -26,3 +26,7 @@ a {
   padding: 20px;
   background-color: #7F78AC;
 }
+
+.btn {
+  background-color: #7F78AC !important;
+}
